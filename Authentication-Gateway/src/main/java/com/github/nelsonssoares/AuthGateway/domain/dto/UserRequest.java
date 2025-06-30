@@ -23,4 +23,5 @@ public class UserRequest extends RepresentationModel<UserRequest> implements Ser
     public String account;
     public String agency;
     public String photo;
+    public String password;
 }
