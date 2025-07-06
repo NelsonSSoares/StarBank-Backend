@@ -2,7 +2,7 @@ package com.github.nelsonssoares.AuthGateway.outlayers.entrypoints;
 
 import com.github.nelsonssoares.AuthGateway.domain.dto.UserRequest;
 import com.github.nelsonssoares.AuthGateway.outlayers.entrypoints.docs.RegistrationControllerDoc;
-import com.github.nelsonssoares.AuthGateway.service.UserResgistrationService;
+import com.github.nelsonssoares.AuthGateway.services.UserResgistrationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
