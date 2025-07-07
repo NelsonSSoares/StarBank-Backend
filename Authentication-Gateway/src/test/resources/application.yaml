@@ -1,5 +1,5 @@
-security:
-  jwt:
-    token:
-      secret-key: 53cr37
-      expiration-lenght: 3600000
+#security:
+#  jwt:
+#    token:
+#      secret-key: 53cr37
+#      expiration-lenght: 3600000
