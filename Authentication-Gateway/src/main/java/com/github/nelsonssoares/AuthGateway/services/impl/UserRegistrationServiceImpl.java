@@ -3,7 +3,7 @@ package com.github.nelsonssoares.AuthGateway.services.impl;
 import com.github.nelsonssoares.AuthGateway.domain.dto.UserRequest;
 import com.github.nelsonssoares.AuthGateway.domain.repositories.UserRepository;
 import com.github.nelsonssoares.AuthGateway.outlayers.gateways.UserGateway;
-import com.github.nelsonssoares.AuthGateway.services.UserResgistrationService;
+import com.github.nelsonssoares.AuthGateway.services.UserRegistrationService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +16,9 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class UserResgistrationServiceImpl implements UserResgistrationService, UserDetailsService {
+public class UserRegistrationServiceImpl implements UserRegistrationService, UserDetailsService {
 
-    private static final Logger log = LoggerFactory.getLogger(UserResgistrationServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(UserRegistrationServiceImpl.class);
 
     private final UserGateway userGateway;
     private final UserRepository repository;
