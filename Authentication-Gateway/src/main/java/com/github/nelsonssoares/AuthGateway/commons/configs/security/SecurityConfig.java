@@ -51,37 +51,61 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         JwtTokenFilter filter = new JwtTokenFilter(tokenProvider);
+
         return http
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
-                .sessionManagement(
-                        session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(authz -> authz
+                        .requestMatchers("/error").permitAll() // ← importante
+                        .requestMatchers(HttpMethod.POST, "/starbank/auth/signin").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/starbank/auth/signup").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/starbank/users").permitAll()
+                        .requestMatchers("/starbank/auth/refresh/**").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/users/**").authenticated()
+                        .anyRequest().authenticated()
                 )
-                .authorizeHttpRequests(
-                        authorizeHttpRequests ->
-                                authorizeHttpRequests
-                                        // Libera os endpoints de autenticação
-                                        .requestMatchers(
-                                                "/starbank/auth/signup",
-                                                "/starbank/auth/signin",
-                                                "/starbank/auth/refresh/**",
-                                                "/swagger-ui/**",
-                                                "/v3/api-docs/**"
-                                        ).permitAll()
-
-                                        // Libera apenas POST para /starbank/users
-                                        .requestMatchers(HttpMethod.POST, "/starbank/users").permitAll()
-
-                                        // Bloqueia qualquer outro acesso a /users/**
-                                        .requestMatchers("/starbank/users/**").authenticated()
-
-                                        // Qualquer outro endpoint precisa de autenticação
-                                        .anyRequest().authenticated()
-                )
-                .cors(cors -> {}) // ou .disable()
+                .cors(cors -> {})
                 .build();
     }
+
+
+//    @Bean
+//    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        JwtTokenFilter filter = new JwtTokenFilter(tokenProvider);
+//        return http
+//                .httpBasic(AbstractHttpConfigurer::disable)
+//                .csrf(AbstractHttpConfigurer::disable)
+//                .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
+//                .sessionManagement(
+//                        session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                )
+//                .authorizeHttpRequests(
+//                        authorizeHttpRequests ->
+//                                authorizeHttpRequests
+//                                        // Libera os endpoints de autenticação
+//                                        .requestMatchers(
+//                                                "/starbank/auth/signup",
+//                                                "/starbank/auth/signin",
+//                                                "/starbank/auth/refresh/**",
+//                                                "/swagger-ui/**",
+//                                                "/v3/api-docs/**"
+//                                        ).permitAll()
+//
+//                                        // Libera apenas POST para /starbank/users
+//                                        .requestMatchers(HttpMethod.POST, "/starbank/users").permitAll()
+//
+//                                        // Bloqueia qualquer outro acesso a /users/**
+//                                        .requestMatchers("/starbank/users/**").authenticated()
+//
+//                                        // Qualquer outro endpoint precisa de autenticação
+//                                        .anyRequest().authenticated()
+//                )
+//                .cors(cors -> {}) // ou .disable()
+//                .build();
+//    }
 
 //    @Bean
 //    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

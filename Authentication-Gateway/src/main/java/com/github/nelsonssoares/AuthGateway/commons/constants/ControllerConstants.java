@@ -9,5 +9,5 @@ public class ControllerConstants {
 
     // ENDPOINTS
     public static final String REGISTER_USER = "/signup";
-    public static final String LOGIN_USER = API_BASE_URL+"/singin";
+    public static final String LOGIN_USER = "/signin";
 }
