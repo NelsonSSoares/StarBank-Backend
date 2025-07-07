@@ -1,3 +1,7 @@
+logging:
+  level:
+    root: TRACE
+
 feign:
   user-api:
     name: user-api

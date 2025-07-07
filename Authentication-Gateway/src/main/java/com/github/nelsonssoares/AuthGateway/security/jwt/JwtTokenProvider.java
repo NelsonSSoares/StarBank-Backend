@@ -52,11 +52,11 @@ public class JwtTokenProvider {
         Date validity = new Date(now.getTime() + validityInMilliseconds);
         String accessToken = getAccesstoken(username, roles, now, validity);
         String refreshToken = getRefreshToken(username, roles, now);
-        return new TokenDTO(username, true, validity, accessToken, refreshToken);
+        return new TokenDTO(username, true, now, validity, accessToken, refreshToken);
     }
 
     private String getRefreshToken(String username, List<String> roles, Date now) {
-        Date refreshValidity = new Date(now.getTime() + validityInMilliseconds * 3);
+        Date refreshValidity = new Date(now.getTime() + ( validityInMilliseconds * 3));
         return JWT.create()
                 .withClaim("roles", roles)
                 .withIssuedAt(now)
