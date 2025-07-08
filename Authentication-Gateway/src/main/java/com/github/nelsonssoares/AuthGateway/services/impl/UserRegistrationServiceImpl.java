@@ -32,7 +32,6 @@ public class UserRegistrationServiceImpl implements UserRegistrationService, Use
     private final UserRepository repository;
 
 
-    @Transactional
     @Override
     public ResponseEntity<UserRequest> registerUser(UserRequest newUser) throws Exception {
 
