@@ -30,9 +30,9 @@ eureka:
     service-url:
       defaultZone: http://eureka-server:8761/eureka
 
-#spring:
-#  profiles:
-#    active: dev
+spring:
+  profiles:
+    active: dev
 
   datasource:
     url: jdbc:mysql://mysql:3306/security
