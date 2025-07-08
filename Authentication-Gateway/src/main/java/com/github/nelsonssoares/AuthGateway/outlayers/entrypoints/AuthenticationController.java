@@ -2,6 +2,7 @@ package com.github.nelsonssoares.AuthGateway.outlayers.entrypoints;
 
 import com.github.nelsonssoares.AuthGateway.domain.dto.UserRequest;
 import com.github.nelsonssoares.AuthGateway.domain.dto.security.AccountCredentialsDTO;
+import com.github.nelsonssoares.AuthGateway.domain.dto.security.TokenDTO;
 import com.github.nelsonssoares.AuthGateway.outlayers.entrypoints.docs.AuthenticationControllerDoc;
 import com.github.nelsonssoares.AuthGateway.services.UserRegistrationService;
 import com.github.nelsonssoares.AuthGateway.services.impl.AuthService;
@@ -38,20 +39,19 @@ public class AuthenticationController implements AuthenticationControllerDoc {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(value = LOGIN_USER)
-    public ResponseEntity<?> signin(@RequestBody AccountCredentialsDTO credentials) throws Exception {
+    public ResponseEntity<TokenDTO> signin(@RequestBody AccountCredentialsDTO credentials) throws Exception {
 
         if(credentialsIsInvalid(credentials)){
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body("Invalid client request, username and password must be provided");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
         var token = authService.signin(credentials);
         if(token == null){
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body("Invalid client request, username or password is incorrect");
+                    .build();
         }
 
-        return ResponseEntity.ok().body(token);
+        return ResponseEntity.ok(token.getBody());
     }
 
     @ResponseStatus(HttpStatus.OK)
