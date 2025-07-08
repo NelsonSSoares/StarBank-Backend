@@ -9,7 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
@@ -37,5 +43,19 @@ public class AuthService {
 
         return ResponseEntity.ok(token);
     }
+
+    public ResponseEntity<TokenDTO> refreshToken(String username, String refreshToken){
+        TokenDTO token ;
+        var user = repository.findByUsername(username);
+        if(user != null) {
+            token = tokenProvider.refreshToken(refreshToken);
+        }else{
+            throw new UsernameNotFoundException("Username not found: " + username);
+        }
+
+        return ResponseEntity.ok().body(token);
+
+    }
+
 
 }

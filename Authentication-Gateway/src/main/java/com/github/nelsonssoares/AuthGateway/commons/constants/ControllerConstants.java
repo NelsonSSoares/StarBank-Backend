@@ -10,4 +10,5 @@ public class ControllerConstants {
     // ENDPOINTS
     public static final String REGISTER_USER = "/signup";
     public static final String LOGIN_USER = "/signin";
+    public static final String REFRESH_TOKEN = "/refresh-token/{username}";
 }

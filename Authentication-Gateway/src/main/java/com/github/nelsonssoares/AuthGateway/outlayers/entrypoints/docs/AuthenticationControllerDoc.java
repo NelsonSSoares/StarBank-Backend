@@ -8,7 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 
-public interface RegistrationControllerDoc {
+public interface AuthenticationControllerDoc {
 
     @Operation(summary = "Metodo para cadastrar novo usuário", method = "POST")
     @ApiResponses(value = {
