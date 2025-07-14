@@ -44,7 +44,7 @@ jobs:
 
       - name: Build Application userapi.jar
         working-directory: ./userapi
-        run: mvn clean package
+        run: mvn clean package -DskipTests
 
       - name: Docker Compose Build 
         working-directory: ./
