@@ -45,8 +45,8 @@ spring:
       max-request-size: 215MB
   application:
     name: user-api
-  profiles:
-    active: dev
+#  profiles:
+#    active: dev
   cloud:
     discovery:
   jpa:
@@ -58,7 +58,7 @@ spring:
   datasource:
     password: '123456'
     username: root
-    url: jdbc:mysql://mysql:3306/mydb
+    url: jdbc:mysql://mysql:3306/mydb?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
 server:
   error:
     include-stacktrace: never
