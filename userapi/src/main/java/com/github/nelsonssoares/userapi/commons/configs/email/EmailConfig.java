@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 @EqualsAndHashCode
 public class EmailConfig {
     private String host;
-    private String port;
+    private Integer port;
     private String username;
     private String password;
     private String from;
