@@ -61,7 +61,3 @@ spring:
             predicates:
               - Path=/starbank/users/**
 
-          - id: Authentication-Gateway
-            uri: lb://authentication-gateway
-            predicates:
-             - Path=/starbank/auth/**
